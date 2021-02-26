@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using keepr.Repositories;
 using keepr.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,41 @@ namespace keepr
     public void ConfigureServices(IServiceCollection services)
     {
 
+      services.AddAuthentication(options =>
+  {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  }).AddJwtBearer(options =>
+  {
+    options.Authority = $"https://{Configuration["Auth0:Domain"]}/";
+    options.Audience = Configuration["Auth0:Audience"];
+  });
+      services.AddCors(options =>
+        {
+          options.AddPolicy("CorsDevPolicy", builder =>
+              {
+                builder
+                          .WithOrigins(new string[]{
+                            "http://localhost:8080",
+                            "http://localhost:8081"
+                          })
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials();
+              });
+        });
+
+      services.AddTransient<KeepsService>();
+      services.AddTransient<KeepsRepository>();
+
+      services.AddTransient<VaultsService>();
+      services.AddTransient<VaultsRepository>()
+      ;
+
+      services.AddTransient<ProfilesService>();
+      services.AddTransient<ProfilesRepository>();
+      //   TODO add in relationship service and repository?
+
       services.AddControllers();
 
       services.AddScoped<IDbConnection>(x => CreateDbConnection());
@@ -39,14 +75,6 @@ namespace keepr
             {
               c.SwaggerDoc("v1", new OpenApiInfo { Title = "keepr", Version = "v1" });
             });
-
-      services.AddTransient<KeepsService>();
-      services.AddTransient<KeepsRepository>();
-
-      services.AddTransient<VaultsService>();
-      services.AddTransient<VaultsRepository>();
-
-      //   TODO add in relationship service and repository?
     }
 
     private IDbConnection CreateDbConnection()
@@ -61,6 +89,7 @@ namespace keepr
       {
         app.UseDeveloperExceptionPage();
         app.UseSwagger();
+        app.UseCors("CorsDevPolicy");
         app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "keepr v1"));
       }
 
