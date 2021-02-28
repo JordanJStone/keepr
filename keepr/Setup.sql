@@ -45,4 +45,4 @@ USE keepr1998;
 -- );
 
 /* Find All of Collection */
-SELECT * FROM profiles;
+SELECT * FROM keeps;
