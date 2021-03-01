@@ -44,5 +44,27 @@ USE keepr1998;
 -- ON DELETE CASCADE
 -- );
 
+-- CREATE TABLE vaultkeeps
+-- (
+--   id INT NOT NULL AUTO_INCREMENT,
+--   creatorid VARCHAR(255) NOT NULL,
+--   vaultId INT NOT NULL,
+--   keepId INT NOT NULL,
+
+-- PRIMARY KEY (id),
+
+-- FOREIGN KEY (creatorId)
+-- REFERENCES profiles(id)
+-- ON DELETE CASCADE,
+
+-- FOREIGN KEY (vaultId)
+-- REFERENCES vaults(id)
+-- ON DELETE CASCADE,
+
+-- FOREIGN KEY (keepId)
+-- REFERENCES keeps(id)
+-- ON DELETE CASCADE
+-- );
+
 /* Find All of Collection */
-SELECT * FROM profiles;
+-- SELECT * FROM profiles;
