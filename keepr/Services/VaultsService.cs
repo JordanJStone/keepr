@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -9,10 +10,12 @@ namespace keepr.Services
   {
 
     private readonly VaultsRepository _repo;
+    private readonly ProfilesRepository _pr;
 
-    public VaultsService(VaultsRepository repo)
+    public VaultsService(VaultsRepository repo, ProfilesRepository pr)
     {
       _repo = repo;
+      _pr = pr;
     }
 
     public IEnumerable<Vault> GetAll()
@@ -59,6 +62,12 @@ namespace keepr.Services
       _repo.Remove(id);
       return "successfully deleted";
     }
+
+    internal IEnumerable<Vault> GetVaultsByProfileId(string id)
+    {
+      return _repo.GetVaultsByProfileId(id).ToList().FindAll(r => r.IsPrivate);
+    }
+
 
   }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using keepr.Models;
 using keepr.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,12 @@ namespace keepr.Controllers
   public class ProfilesController : ControllerBase
   {
     private readonly ProfilesService _service;
+    private readonly VaultsService _vs;
 
-    public ProfilesController(ProfilesService service)
+    public ProfilesController(ProfilesService service, VaultsService vs)
     {
       _service = service;
+      _vs = vs;
     }
 
     [HttpGet("{id}")]
@@ -30,7 +33,19 @@ namespace keepr.Controllers
       }
     }
 
-
+    [HttpGet("{id}/vaults")]
+    public ActionResult<IEnumerable<Vault>> GetVaultsByProfileId(string id)
+    {
+      try
+      {
+        IEnumerable<Vault> vaults = _vs.GetVaultsByProfileId(id);
+        return Ok(vaults);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
 
   }
