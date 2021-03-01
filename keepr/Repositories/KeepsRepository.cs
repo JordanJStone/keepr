@@ -71,18 +71,18 @@ namespace keepr.Repositories
     }
 
     // // REVIEW[epic=many-to-many] This sql will add the relationship id to a Party, as the PartyPartyMemberViewModel
-    // internal IEnumerable<PartyPartyMemberViewModel> GetPartiesByProfileId(string id)
-    // {
-    //   string sql = @"
-    //   SELECT
-    //   p.*,
-    //   pm.id as PartyMemberId
-    //   FROM partymembers pm
-    //   JOIN parties p ON pm.partyId == p.id
-    //   WHERE memberId = @id
-    //   ";
-    //   return _db.Query<PartyPartyMemberViewModel>(sql, new { id });
-    // }
+    internal IEnumerable<KeepsByVaultViewModel> GetKeepsByVaultId(string id)
+    {
+      string sql = @"
+      SELECT
+      keep.*,
+      vk.id as VaultKeepId
+      FROM vaultkeeps vk
+      JOIN keeps keep ON vk.keepId == keep.id
+      WHERE memberId = @id
+      ";
+      return _db.Query<KeepsByVaultViewModel>(sql, new { id });
+    }
 
     internal void Remove(int id)
     {

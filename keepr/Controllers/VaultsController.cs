@@ -15,9 +15,11 @@ namespace keepr.Controllers
   {
 
     private readonly VaultsService _service;
-    public VaultsController(VaultsService service)
+    private readonly KeepsService _ks;
+    public VaultsController(VaultsService service, KeepsService ks)
     {
       _service = service;
+      _ks = ks;
     }
 
     [HttpGet]
@@ -96,6 +98,20 @@ namespace keepr.Controllers
       }
     }
 
+    [HttpGet(("{id}/keeps"))]
+    [Authorize]
+    public ActionResult<IEnumerable<KeepsByVaultViewModel>> GetKeeps(string id)
+    {
+      try
+      {
+        IEnumerable<KeepsByVaultViewModel> keeps = _ks.GetByProfileId(id);
+        return Ok(keeps);
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
 
   }
 }

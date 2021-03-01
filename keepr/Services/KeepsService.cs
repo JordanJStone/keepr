@@ -58,11 +58,11 @@ namespace keepr.Services
       return "successfully deleted";
     }
 
-    // internal IEnumerable<PartyPartyMemberViewModel> GetByProfileId(string id)
-    // {
-    //   IEnumerable<PartyPartyMemberViewModel> data = _repo.GetPartiesByProfileId(id);
-    //   return data;
-    // }
+    internal IEnumerable<KeepsByVaultViewModel> GetByProfileId(string id)
+    {
+      IEnumerable<KeepsByVaultViewModel> data = _repo.GetKeepsByVaultId(id);
+      return data;
+    }
 
   }
 }
