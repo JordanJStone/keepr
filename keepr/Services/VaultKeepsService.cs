@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -14,9 +15,20 @@ namespace keepr.Services
       _repo = repo;
     }
 
-    internal void Create(VaultKeep vk)
+    public IEnumerable<VaultKeep> GetAll()
     {
-      _repo.Create(vk);
+      IEnumerable<VaultKeep> vaultkeeps = _repo.GetAll();
+      return vaultkeeps;
+    }
+
+    // internal void Create(VaultKeep vk)
+    // {
+    //   _repo.Create(vk);
+    // }
+    public VaultKeep Create(VaultKeep newVaultKeep)
+    {
+      newVaultKeep.Id = _repo.Create(newVaultKeep);
+      return newVaultKeep;
     }
 
     internal void Delete(int id)

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Data;
 using Dapper;
 using keepr.Models;
@@ -13,14 +14,17 @@ namespace keepr.Repositories
       _db = db;
     }
 
-    internal void Create(VaultKeep vk)
+    public IEnumerable<VaultKeep> GetAll()
     {
       string sql = @"
-      INSERT INTO partymembers
-      (creatorId, vaultId, keepId)
-      VALUES
-      (@CreatorId, @VaultId, @KeepId);";
-      _db.Execute(sql, vk);
+       SELECT 
+       vk.*,
+       profile.* 
+       FROM vaultkeeps vk 
+       JOIN profiles profile ON vk.creatorId = profile.id;";
+      return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (vk, profile) => { vk.CreatorId = profile.Id; return vk; }, splitOn: "id");
+      // string sql = "SELECT * FROM vaultkeeps;";
+      // return _db.Query<VaultKeep>(sql);
     }
 
     internal VaultKeep GetById(int id)
@@ -28,6 +32,18 @@ namespace keepr.Repositories
       string sql = "SELECT * FROM vaultkeeps WHERE id = @id;";
       return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
     }
+
+    internal int Create(VaultKeep vk)
+    {
+      string sql = @"
+      INSERT INTO vaultkeeps
+      (creatorId, vaultId, keepId)
+      VALUES
+      (@CreatorId, @VaultId, @KeepId);
+      SELECT LAST_INSERT_ID()";
+      return _db.ExecuteScalar<int>(sql, vk);
+    }
+
 
     internal void Delete(int id)
     {

@@ -100,12 +100,13 @@ namespace keepr.Controllers
 
     [HttpGet(("{id}/keeps"))]
     [Authorize]
-    public ActionResult<IEnumerable<KeepsByVaultViewModel>> GetKeeps(string id)
+    public ActionResult<IEnumerable<Vault>> GetKeeps(int id)
     {
       try
       {
-        IEnumerable<KeepsByVaultViewModel> keeps = _ks.GetByProfileId(id);
-        return Ok(keeps);
+        return Ok(_ks.GetByProfileId(id));
+        // IEnumerable<KeepsByVaultViewModel> keeps = _ks.GetByProfileId(id);
+        // return Ok(keeps);
       }
       catch (Exception e)
       {

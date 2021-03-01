@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using keepr.Models;
 using keepr.Repositories;
 
@@ -8,10 +9,12 @@ namespace keepr.Services
   public class KeepsService
   {
     private readonly KeepsRepository _repo;
+    private readonly VaultsRepository _vr;
 
-    public KeepsService(KeepsRepository repo)
+    public KeepsService(KeepsRepository repo, VaultsRepository vr)
     {
       _repo = repo;
+      _vr = vr;
     }
 
     public IEnumerable<Keep> GetAll()
@@ -58,10 +61,19 @@ namespace keepr.Services
       return "successfully deleted";
     }
 
-    internal IEnumerable<KeepsByVaultViewModel> GetByProfileId(string id)
+    internal IEnumerable<Keep> GetByProfileId(int id)
     {
-      IEnumerable<KeepsByVaultViewModel> data = _repo.GetKeepsByVaultId(id);
-      return data;
+      Vault exists = _vr.GetById(id);
+      if (exists == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return _repo.GetByVaultId(id);
+
+      // return _repo.GetByVaultId(id).ToList().FindAll(r => r.CreatorId);
+
+      // IEnumerable<KeepsByVaultViewModel> data = _repo.GetKeepsByVaultId(id);
+      // return data;
     }
 
   }

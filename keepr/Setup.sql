@@ -66,5 +66,17 @@ USE keepr1998;
 -- ON DELETE CASCADE
 -- );
 
+/* Add To Collection */
+/* INSERT INTO vaultkeeps (creatorId, vaultId, keepId) VALUES (8b7354e0-395d-455a-9305-eca2d5f0ba55, 5, 1);
+INSERT INTO burgers (name, age, hungry) VALUES ("rover", 5, true);
+INSERT INTO burgers (name, age, hungry) VALUES ("max", 6, true);
+INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
+
+--  INSERT INTO vaultkeeps (creatorId, vaultId, keepId) 
+--  VALUES ("23df7361-bfa9-4183-8257-a0d4f0a0cdae", 4, 5);
+
 /* Find All of Collection */
+-- SELECT * FROM vaultkeeps;
 -- SELECT * FROM profiles;
+-- SELECT * FROM vaults;
+-- SELECT * FROM keeps;

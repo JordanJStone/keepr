@@ -65,6 +65,9 @@ namespace keepr
 
       services.AddTransient<ProfilesService>();
       services.AddTransient<ProfilesRepository>();
+
+      services.AddTransient<VaultKeepsService>();
+      services.AddTransient<VaultKeepsRepository>();
       //   TODO add in relationship service and repository?
 
       services.AddControllers();
