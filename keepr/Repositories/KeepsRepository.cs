@@ -102,5 +102,19 @@ namespace keepr.Repositories
       _db.Execute(sql, new { id });
     }
 
+    // GetKeepsByProfileId
+    internal IEnumerable<Keep> GetKeepsByProfileId(string id)
+    {
+      // TODO this needs to be fixed, or the service at least
+      string sql = @"
+       SELECT 
+       keep.*,
+       profile.* 
+       FROM keeps keep
+       JOIN profiles profile ON keep.creatorId = profile.id
+       WHERE keep.creatorId = @id;";
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { id }, splitOn: "id");
+
+    }
   }
 }

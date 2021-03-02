@@ -70,10 +70,12 @@ namespace keepr.Services
       }
       return _repo.GetByVaultId(id);
 
-      // return _repo.GetByVaultId(id).ToList().FindAll(r => r.CreatorId);
+    }
 
-      // IEnumerable<KeepsByVaultViewModel> data = _repo.GetKeepsByVaultId(id);
-      // return data;
+    internal IEnumerable<Keep> GetKeepsByProfileId(string id)
+    {
+      return _repo.GetKeepsByProfileId(id).ToList().FindAll(r => );
+      // TODO finish the above line
     }
 
   }

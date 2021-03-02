@@ -65,7 +65,7 @@ namespace keepr.Services
 
     internal IEnumerable<Vault> GetVaultsByProfileId(string id)
     {
-      return _repo.GetVaultsByProfileId(id).ToList().FindAll(r => r.IsPrivate);
+      return _repo.GetVaultsByProfileId(id).ToList().FindAll(r => !r.IsPrivate);
     }
 
 
