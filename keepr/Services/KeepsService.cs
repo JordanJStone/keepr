@@ -61,8 +61,9 @@ namespace keepr.Services
       return "successfully deleted";
     }
 
-    internal IEnumerable<Keep> GetByProfileId(int id)
+    internal IEnumerable<Keep> GetByVaultId(int id)
     {
+      // return _repo.GetByVaultId(id).ToList().FindAll(r => id);
       Vault exists = _vr.GetById(id);
       if (exists == null)
       {
@@ -74,8 +75,8 @@ namespace keepr.Services
 
     internal IEnumerable<Keep> GetKeepsByProfileId(string id)
     {
-      return _repo.GetKeepsByProfileId(id).ToList().FindAll(r => );
-      // TODO finish the above line
+      return _repo.GetKeepsByProfileId(id).ToList().FindAll(r => r.CreatorId == id);
+      // TODO put something in above line
     }
 
   }

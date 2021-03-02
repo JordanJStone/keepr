@@ -31,14 +31,13 @@ namespace keepr.Services
       return newVaultKeep;
     }
 
-    internal void Delete(int id)
+    internal string Delete(int id, string userId)
     {
-      var data = _repo.GetById(id);
-      if (data == null)
-      {
-        throw new Exception("Invalid Id");
-      }
+      VaultKeep original = _repo.GetById(id);
+      if (original == null) { throw new Exception("Bad ID"); }
+      if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a VaultKeep You did not Create"); }
       _repo.Delete(id);
+      return "successfully deleted";
     }
 
   }

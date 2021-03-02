@@ -78,5 +78,11 @@ INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
 /* Find All of Collection */
 -- SELECT * FROM vaultkeeps;
 -- SELECT * FROM profiles;
-SELECT * FROM vaults;
+-- SELECT * FROM vaults;
 -- SELECT * FROM keeps;
+
+      -- SELECT keep.*,
+      -- v.id as VaultKeepId
+      -- FROM vaultkeeps v
+      -- JOIN keeps keep ON keep.id = v.keepId
+      -- WHERE vaultId = 5;

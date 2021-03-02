@@ -84,16 +84,28 @@ namespace keepr.Repositories
     //   return _db.Query<KeepsByVaultViewModel>(sql, new { id });
     // }
 
-    internal IEnumerable<Keep> GetByVaultId(int id)
+    // internal IEnumerable<Keep> GetByVaultId(int id)
+    // {
+    //   string sql = @"
+    //    SELECT 
+    //    keep.*,
+    //    profile.* 
+    //    FROM keeps keep 
+    //    JOIN profiles profile ON keep.creatorId = profile.id
+    //    WHERE keep.creatorId = @id;";
+    //   return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { id }, splitOn: "id");
+    // }
+
+    internal IEnumerable<Keep> GetByVaultId(int vaultId)
     {
       string sql = @"
-       SELECT 
-       keep.*,
-       profile.* 
-       FROM keeps keep 
-       JOIN profiles profile ON keep.creatorId = profile.id
-       WHERE keep.creatorId = @id;";
-      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { id }, splitOn: "id");
+      SELECT keep.*,
+      v.id as VaultKeepId
+      FROM vaultkeeps v
+      JOIN keeps keep ON keep.id = v.keepId
+      WHERE vaultId = @vaultId";
+
+      return _db.Query<KeepsByVaultViewModel>(sql, new { vaultId });
     }
 
     internal void Remove(int id)
@@ -105,7 +117,6 @@ namespace keepr.Repositories
     // GetKeepsByProfileId
     internal IEnumerable<Keep> GetKeepsByProfileId(string id)
     {
-      // TODO this needs to be fixed, or the service at least
       string sql = @"
        SELECT 
        keep.*,

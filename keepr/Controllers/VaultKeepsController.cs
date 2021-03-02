@@ -67,12 +67,13 @@ namespace keepr.Controllers
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<string> Delete(int id)
+    [Authorize]
+    public async Task<ActionResult<string>> Delete(int id)
     {
       try
       {
-        _service.Delete(id);
-        return Ok("success");
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_service.Delete(id, userInfo.Id));
       }
       catch (Exception e)
       {

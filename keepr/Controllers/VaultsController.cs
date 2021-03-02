@@ -24,6 +24,7 @@ namespace keepr.Controllers
 
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
+    // Do we need a get all vaults?
     {
       try
       {
@@ -35,7 +36,22 @@ namespace keepr.Controllers
       }
     }
 
+    // [HttpGet("{id}")]
+    // // No Auth needed here? Can't have two "Get"s, one with auth and one without.
+    // public ActionResult<IEnumerable<Vault>> Get(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok(_service.GetById(id));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
+
     [HttpGet("{id}")]
+    // No Auth needed here? Can't have two "Get"s, one with auth and one without.
     public ActionResult<IEnumerable<Vault>> Get(int id)
     {
       try
@@ -47,6 +63,20 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    // [HttpGet("{id}")]
+    // [Authorize]
+    // public ActionResult<IEnumerable<Vault>> GetAuthorized(int id)
+    // {
+    //   try
+    //   {
+    //     return Ok(_service.GetById(id));
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
 
     [HttpPost]
     [Authorize]
@@ -69,6 +99,7 @@ namespace keepr.Controllers
     [HttpPut("{id}")]
     [Authorize]
     public async Task<ActionResult<Vault>> Edit(int id, [FromBody] Vault updated)
+    // Delete this put? Do we need it? Double check in Postman
     {
       try
       {
@@ -99,14 +130,12 @@ namespace keepr.Controllers
     }
 
     [HttpGet(("{id}/keeps"))]
-    [Authorize]
-    public ActionResult<IEnumerable<Vault>> GetKeeps(int id)
+    // [Authorize]
+    public ActionResult<IEnumerable<Vault>> GetKeepsByVaultId(int id)
     {
       try
       {
-        return Ok(_ks.GetByProfileId(id));
-        // IEnumerable<KeepsByVaultViewModel> keeps = _ks.GetByProfileId(id);
-        // return Ok(keeps);
+        return Ok(_ks.GetByVaultId(id));
       }
       catch (Exception e)
       {
