@@ -38,7 +38,7 @@ namespace keepr.Services
 
     // internal Vault GetByIdForEditingOnly(int id)
     // {
-    //   var data = _repo.GetById(id);
+    //   var data = _repo.GetByIdForEditingOnly(id);
     //   if (data == null)
     //   {
     //     throw new Exception("Invalid Id");
@@ -57,7 +57,6 @@ namespace keepr.Services
     {
       Vault original = GetById(updated.Id);
       if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Vault You did not Create"); }
-      //   TODO change this to Vaults, not Party info
       updated.Name = updated.Name != null ? updated.Name : original.Name;
       updated.Description = updated.Description != null ? updated.Description : original.Description;
       updated.IsPrivate = updated.IsPrivate != original.IsPrivate ? updated.IsPrivate : original.IsPrivate;

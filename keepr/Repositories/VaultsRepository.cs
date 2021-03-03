@@ -44,6 +44,22 @@ namespace keepr.Repositories
       }, new { id }, splitOn: "id").FirstOrDefault();
     }
 
+    internal Vault GetByIdForEditingOnly(int id)
+    {
+      string sql = @" 
+      SELECT 
+      vault.*,
+      profile.*
+      FROM vaults vault
+      JOIN profiles profile ON vault.creatorId = profile.id
+      WHERE vault.id = @id";
+      return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+      {
+        vault.Creator = profile;
+        return vault;
+      }, new { id }, splitOn: "id").FirstOrDefault();
+    }
+
     internal int Create(Vault newVault)
     {
       string sql = @"
@@ -67,6 +83,19 @@ namespace keepr.Repositories
       _db.Execute(sql, updated);
       return updated;
     }
+
+    // internal Vault EditSpecialUseOnly(Vault updated)
+    // {
+    //   string sql = @"
+    //     UPDATE vaults
+    //     SET
+    //      name = @Name,
+    //      description = @Description,
+    //      isPrivate = @IsPrivate
+    //     WHERE id = @Id;";
+    //   _db.Execute(sql, updated);
+    //   return updated;
+    // }
 
     internal void Remove(int id)
     {
