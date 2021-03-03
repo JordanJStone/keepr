@@ -86,3 +86,12 @@ INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
       -- FROM vaultkeeps v
       -- JOIN keeps keep ON keep.id = v.keepId
       -- WHERE vaultId = 5;
+
+
+-- NOTE this is all vaults since it's from account controller
+      -- SELECT 
+      --  vault.*,
+      --  profile.* 
+      --  FROM vaults vault 
+      --  JOIN profiles profile ON vault.CreatorId = profile.id
+      --  WHERE vault.CreatorId = '23df7361-bfa9-4183-8257-a0d4f0a0cdae';

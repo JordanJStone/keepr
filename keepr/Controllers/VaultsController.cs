@@ -51,7 +51,7 @@ namespace keepr.Controllers
     // }
 
     [HttpGet("{id}")]
-    // No Auth needed here? Can't have two "Get"s, one with auth and one without.
+    // [Authorize]
     public ActionResult<IEnumerable<Vault>> Get(int id)
     {
       try
@@ -99,7 +99,6 @@ namespace keepr.Controllers
     [HttpPut("{id}")]
     [Authorize]
     public async Task<ActionResult<Vault>> Edit(int id, [FromBody] Vault updated)
-    // Delete this put? Do we need it? Double check in Postman
     {
       try
       {

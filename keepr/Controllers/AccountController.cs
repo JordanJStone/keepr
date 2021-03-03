@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using keepr.Models;
@@ -15,10 +16,12 @@ namespace keepr.Controllers
   {
 
     private readonly ProfilesService _ps;
+    private readonly VaultsService _vs;
 
-    public AccountController(ProfilesService ps)
+    public AccountController(ProfilesService ps, VaultsService vs)
     {
       _ps = ps;
+      _vs = vs;
     }
 
     [HttpGet]
@@ -35,14 +38,15 @@ namespace keepr.Controllers
       }
     }
 
-    // [HttpGet("reviews")]
-    // public async Task<ActionResult<IEnumerable<Review>>> GetReviewsByProfileIdAsync()
+
+    // [HttpGet("vaults")]
+    // public async Task<ActionResult<IEnumerable<Vault>>> GetVaultsByProfileIdAsync()
     // {
     //   try
     //   {
     //     Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-    //     IEnumerable<Review> reviews = _rs.GetReviewsByAccountId(userInfo.Id);
-    //     return Ok(reviews);
+    //     IEnumerable<Vault> vaults = _vs.GetVaultsByAccountId(userInfo.Id);
+    //     return Ok(vaults);
     //   }
     //   catch (Exception e)
     //   {

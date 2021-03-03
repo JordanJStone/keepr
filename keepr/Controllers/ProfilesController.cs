@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using keepr.Models;
 using keepr.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace keepr.Controllers
@@ -36,6 +37,7 @@ namespace keepr.Controllers
     }
 
     [HttpGet("{id}/vaults")]
+    // [Authorize]
     public ActionResult<IEnumerable<Vault>> GetVaultsByProfileId(string id)
     {
       try

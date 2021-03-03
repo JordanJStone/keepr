@@ -28,12 +28,24 @@ namespace keepr.Services
     internal Vault GetById(int id)
     {
       var data = _repo.GetById(id);
-      if (data == null)
+      // NOTE The data.IsPrivate broke the editing for some reason, used to be if (data == null)
+      if (data.IsPrivate)
       {
         throw new Exception("Invalid Id");
       }
       return data;
     }
+
+    // internal Vault GetByIdForEditingOnly(int id)
+    // {
+    //   var data = _repo.GetById(id);
+    //   if (data == null)
+    //   {
+    //     throw new Exception("Invalid Id");
+    //   }
+    //   return data;
+    // }
+
 
     public Vault Create(Vault newVault)
     {
@@ -67,6 +79,14 @@ namespace keepr.Services
     {
       return _repo.GetVaultsByProfileId(id).ToList().FindAll(r => !r.IsPrivate);
     }
+
+    // This comes from the Account Controller
+    // GetVaultsByAccountId
+    // internal IEnumerable<Vault> GetVaultsByAccountId(string id)
+    // {
+    //   return _repo.GetByCreatorId(id);
+
+    // }
 
 
   }
