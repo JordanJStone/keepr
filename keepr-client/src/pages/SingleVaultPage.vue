@@ -1,7 +1,13 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      test
+      <h2>{{ activeVault.name }}&nbsp;&nbsp;<i class="fa fa-trash-o text-danger" aria-hidden="true"></i></h2>
+    </div>
+    <div class="row">
+      <div class="col-12 masonry">
+        <myKeeps-component class="item" v-for="r in state.keeps" :key="r.id" :keep-prop="r">
+        </myKeeps-component>
+      </div>
     </div>
   </div>
 </template>
@@ -25,14 +31,37 @@ export default {
       } catch (error) {
         logger.log(error)
       }
+      try {
+        await vaultsService.getActiveVault(route.params.id)
+      } catch (error) {
+        logger.log(error)
+      }
     })
     return {
-      state
+      state,
+      activeVault: computed(() => AppState.activeVault)
     }
   }
 }
 </script>
 
 <style scoped>
+.masonry {
+  column-count: 4;
+  column-gap: 1em;
+}
+
+.masonry-custom {
+  column-count: 1;
+  column-gap: 1em;
+}
+
+.item { /* Masonry bricks or child elements */
+  background-color: #eee;
+  display: inline-block;
+  margin: 0 0 1em;
+  width: 100%;
+  /* display: inline-block; */
+}
 
 </style>
