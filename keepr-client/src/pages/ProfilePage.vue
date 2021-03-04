@@ -7,13 +7,23 @@
     </div>
     <div class="row">
       <div class="col-12">
+        <!-- <div class="row"> -->
         <h3>Vaults <i class="fa fa-plus text-success" aria-hidden="true"></i></h3>
-      </div>
-      <div class="col-12">
-        <h3>Keeps <i class="fa fa-plus text-success" aria-hidden="true"></i></h3>
+        <div class="row">
+          <div class="col-12">
+            <div class="masonry-custom mt-2">
+              <myVaults-component class="item" v-for="r in state.vaults" :key="r.id" :vault-prop="r">
+              </myVaults-component>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
+      <div class="col-12">
+        <h3>Keeps <i class="fa fa-plus text-success" aria-hidden="true"></i></h3>
+      </div>
+      <!-- <div class="row"> -->
       <div class="col-12">
         <div class="masonry">
           <myKeeps-component v-for="r in state.keeps" :key="r.id" :keep-prop="r">
@@ -22,13 +32,7 @@
       </div>
     </div>
   </div>
-  <!-- </div> -->
 </template>
-
-        // <div class="masonry">
-        //   <myVaults-component v-for="r in state.vaults" :key="r.id" :keep-prop="r">
-        //   </myVaults-component>
-        // </div>
 
 <script>
 import { onMounted, reactive, computed } from 'vue'
@@ -70,11 +74,17 @@ export default {
   column-gap: 1em;
 }
 
+.masonry-custom {
+  column-count: 1;
+  column-gap: 1em;
+}
+
 .item { /* Masonry bricks or child elements */
   background-color: #eee;
   display: inline-block;
   margin: 0 0 1em;
   width: 100%;
+  /* display: inline-block; */
 }
 
 </style>

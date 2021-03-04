@@ -1,8 +1,10 @@
 <template>
-  <div class="myVaultsComponent card mb-2 imageFit" :style="{backgroundImage:`url(${vaultProp.img})`}">
-    <h4>
-      {{ vaultProp.name }}
-    </h4>
+  <div class="col-3">
+    <div class="myVaultsComponent card mb-2 background">
+      <h4>
+        {{ vaultProp.name }}
+      </h4>
+    </div>
   </div>
 </template>
 
@@ -23,10 +25,8 @@ export default {
 </script>
 
 <style scoped>
-.imageFit{
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-  }
+.background {
+background-image: linear-gradient(white, #e6fff7);
+}
 
 </style>

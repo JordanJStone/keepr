@@ -1,5 +1,6 @@
 <template>
-  <div class="keepsComponent card mb-2 imageFit" :data-target="'#keep-modal-'+keepProp.id" data-toggle="modal" :style="{backgroundImage:`url(${keepProp.img})`}">
+  <div class="keepsComponent card mb-2 img-fluid" :data-target="'#keep-modal-'+keepProp.id" data-toggle="modal">
+    <img :src="keepProp.img">
     <h4>
       {{ keepProp.name }}
     </h4>
@@ -39,7 +40,7 @@
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </div>
-              <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+              <i class="fa fa-trash-o fa-2x text-danger" aria-hidden="true"></i>
               <router-link :to="{name: 'ProfilePage', params: {id: keepProp.creator.id }}">
                 <i class="fa fa-user" aria-hidden="true">{{ keepProp.creator.name }}</i>
               </router-link>
@@ -69,15 +70,19 @@ export default {
 </script>
 
 <style scoped>
-.imageFit{
+/* .imageFit{
   height: 100%;
   width: 100%;
   object-fit: contain;
-  }
+  } */
 
 .modal-footer{
   position: absolute;
   bottom: 0;
+}
+
+.img {
+  background-image: ;
 }
 
 </style>

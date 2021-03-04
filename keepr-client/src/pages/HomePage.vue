@@ -1,16 +1,20 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <div class="container-fluid">
-      <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+  <!-- <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center"> -->
+  <div class="container-fluid">
+    <!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
         Modal Test
       </button>
       <QuickModal /> -->
-      <div class="masonry mt-2">
-        <keeps-component v-for="r in state.keeps" :key="r.id" :keep-prop="r">
-        </keeps-component>
+    <div class="row">
+      <div class="col-12">
+        <div class="masonry mt-2">
+          <keeps-component class="item" v-for="r in state.keeps" :key="r.id" :keep-prop="r">
+          </keeps-component>
+        </div>
       </div>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -40,10 +44,10 @@ export default {
 .home{
   text-align: center;
   user-select: none;
-  // > img{
-  //   height: 200px;
-  //   width: 200px;
-  // }
+  > img{
+    height: 200px;
+    width: 200px;
+  }
 }
 
 .masonry { /* Masonry container */
