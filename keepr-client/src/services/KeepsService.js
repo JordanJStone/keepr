@@ -8,6 +8,19 @@ class KeepsService {
     AppState.keeps = res.data
   }
 
+  async getMyKeeps(id) {
+    const res = await api.get('api/profiles/' + id + '/keeps')
+    console.log(res.data)
+    AppState.myKeeps = res.data
+  }
+
+  //   async getMyVaults(id) {
+  //   const res = await api.get('api/profiles/' + id + '/vaults')
+  //   // unsure if correct right now
+  //   console.log(res.data)
+  //   AppState.vaults = res.data
+  // }
+
   // async getOne(id) {
   //   const res = await api.get('api/keeps/' + id)
   //   AppState.activeKeep = res.data

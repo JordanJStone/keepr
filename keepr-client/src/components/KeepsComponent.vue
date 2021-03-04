@@ -18,8 +18,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="row">
-          <div class="col-6 imgFit">
-            <img :src="keepProp.img">
+          <div class="col-6">
+            <img class="imageFit" :src="keepProp.img">
           </div>
           <div class="col-6">
             <div>
@@ -28,7 +28,7 @@
             <div>
               {{ keepProp.description }}
             </div>
-            <div class="modal-footer col-12 d-flex justify-content-between">
+            <div class="modal-footer col-12 d-flex justify-content-around align-content flex-end">
               <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                   Dropdown button
@@ -39,8 +39,10 @@
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </div>
-              <i class="fa fa-trash-o text-center" aria-hidden="true"></i>
-              <i class="fa fa-user" aria-hidden="true"></i>
+              <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
+              <router-link :to="{name: 'ProfilePage', params: {id: keepProp.creator.id }}">
+                <i class="fa fa-user" aria-hidden="true">{{ keepProp.creator.name }}</i>
+              </router-link>
             </div>
           </div>
         </div>
@@ -70,7 +72,12 @@ export default {
 .imageFit{
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
   }
+
+.modal-footer{
+  position: absolute;
+  bottom: 0;
+}
 
 </style>
