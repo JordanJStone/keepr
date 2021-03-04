@@ -1,10 +1,12 @@
 <template>
   <div class="col-3">
-    <div class="myVaultsComponent card mb-2 background">
-      <h4>
-        {{ vaultProp.name }}
-      </h4>
-    </div>
+    <router-link :to="{ name: 'SingleVaultPage', params: { id: vaultProp.id}}">
+      <div class="myVaultsComponent card mb-2 background">
+        <h4>
+          {{ vaultProp.name }}
+        </h4>
+      </div>
+    </router-link>
   </div>
 </template>
 

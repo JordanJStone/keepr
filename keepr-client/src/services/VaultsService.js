@@ -8,6 +8,13 @@ class VaultsService {
     AppState.myVaults = res.data
   }
 
+  // getAllKeeps(route.params.id)
+  async getAllKeeps(id) {
+    const res = await api.get('api/vaults/' + id + '/keeps')
+    console.log(res)
+    AppState.singleVaultKeeps = res.data
+  }
+
   // async getOne(id) {
   //   const res = await api.get('api/vaults/' + id)
   //   AppState.activeKeep = res.data
