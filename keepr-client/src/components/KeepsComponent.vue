@@ -17,24 +17,23 @@
   >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">
-            Modal title
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          {{ keepProp.name }}
+        <button type="button" class="close text-right pr-2" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="row">
+          <div class="col-6">
+            test
+            <img src="{{keepProp.Img}}">
+          </div>
+          <div class="col-6">
+            {{ keepProp.name }}
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">
-            Close
-          </button>
-          <button type="button" class="btn btn-primary">
-            Save changes
-          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <DropdownComponent v-for="vault in state.vaults" :key="vault.id" :vault-props="vault" :list-prop="listProp" />
+          </div>
+          <i class="fa fa-trash-o text-center" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -42,7 +41,8 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { AppState } from '../AppState'
 export default {
   name: 'KeepsComponent',
   props: {
@@ -50,7 +50,7 @@ export default {
   },
   setup(props) {
     const state = reactive({
-
+      vaults: computed(() => AppState.vaults.filter(l => l.id !== props.keepProp.vault))
     })
     return { state }
   }
