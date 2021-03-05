@@ -18,6 +18,12 @@ class KeepsService {
     await api.post('api/keeps', newKeep)
   }
 
+  async increment(keep) {
+    const updated = { keeps: keep.keeps++ }
+    await api.put('api/keeps/' + keep.id, updated)
+  }
+  // { await api.delete('api/vaultkeeps/' + keepProp.vaultKeepId) }
+
   async deleteKeep(keep) {
     console.log(keep)
     if (confirm('Confirm deletion?')) { await api.delete('api/keeps/' + keep.id) }

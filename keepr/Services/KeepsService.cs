@@ -47,7 +47,9 @@ namespace keepr.Services
       updated.Name = updated.Name != null ? updated.Name : original.Name;
       updated.Description = updated.Description != null ? updated.Description : original.Description;
       updated.Img = updated.Img != null ? updated.Img : original.Img;
-      updated.Name = updated.Name != null ? updated.Name : original.Name;
+      updated.Views = updated.Views != original.Views ? updated.Views : original.Views;
+      updated.Shares = updated.Shares != original.Shares ? updated.Shares : original.Shares;
+      updated.Keeps = updated.Keeps != original.Keeps ? updated.Keeps : original.Keeps;
 
       return _repo.Edit(updated);
     }

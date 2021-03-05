@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { keepsService } from '../services/KeepsService'
 import { vaultKeepsService } from '../services/VaultKeepsService'
 import { logger } from '../utils/Logger'
 export default {
@@ -17,6 +18,7 @@ export default {
         try {
           console.log(keep, newVaultId)
           vaultKeepsService.createVaultKeep(keep, newVaultId)
+          keepsService.increment(keep)
         } catch (error) {
           logger.log(error)
         }

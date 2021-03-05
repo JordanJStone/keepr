@@ -1,11 +1,17 @@
 <template>
   <!-- <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center"> -->
   <div class="container-fluid ProfilePage">
-    <div class="row">
-      <div class="col-2"></div>
-      <div class="col-4"></div>
+    <div class="row mt-5">
+      <div class="col-2">
+        <img :src="state.user.picture" class="img-fluid">
+      </div>
+      <div class="col-4">
+        <h1>{{ state.user.name }}</h1>
+        <h3>Vaults: {{ state.vaults.length }}</h3>
+        <h3>Keeps: {{ state.keeps.length }}</h3>
+      </div>
     </div>
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-12">
         <h3>Vaults <i class="fa fa-plus text-success" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i></h3>
 
@@ -175,6 +181,7 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
+      user: computed(() => AppState.user),
       vaults: computed(() => AppState.myVaults),
       keeps: computed(() => AppState.myKeeps),
       newVault: {
