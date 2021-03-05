@@ -2,10 +2,13 @@
 import { api } from './AxiosService'
 
 class VaultKeepsService {
-  async removeKeepFromVault(id) {
-    console.log(id)
-    if (confirm('Confirm deletion?')) { await api.delete('api/vaultkeeps/' + id) }
-    // this.getNotes(note.bug)
+  // async getRelationshipId(vaultId) {
+  //   await api.get('api/vaults/' + vaultId + '/keeps')
+  // }
+
+  async removeKeepFromVault(keepProp) {
+    console.log(keepProp)
+    if (confirm('Confirm deletion?')) { await api.delete('api/vaultkeeps/' + keepProp.vaultKeepId) }
   }
 
   async createVaultKeep(keep, newVaultId) {

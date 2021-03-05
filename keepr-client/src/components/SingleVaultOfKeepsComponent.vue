@@ -9,8 +9,9 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
-import { useRoute } from 'vue-router'
+import { reactive, computed } from 'vue'
+// import { useRoute } from 'vue-router'
+import { AppState } from '../AppState'
 import { vaultKeepsService } from '../services/VaultKeepsService'
 import { logger } from '../utils/Logger'
 // import { AppState } from '../AppState'
@@ -20,14 +21,15 @@ export default {
     keepProp: { type: Object, required: true }
   },
   setup(props) {
-    const route = useRoute()
+    // const route = useRoute()
     const state = reactive({
+      keeps: computed(() => AppState.singleVaultKeeps)
     })
     return {
       state,
       removeKeepFromVault() {
         try {
-          vaultKeepsService.removeKeepFromVault(route.params.id)
+          vaultKeepsService.removeKeepFromVault(props.keepProp)
         } catch (error) {
           logger.log(error)
         }
