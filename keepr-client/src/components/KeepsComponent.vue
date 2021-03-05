@@ -39,7 +39,7 @@
                   Put task in Vault
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <DropdownComponent v-for="vault in state.vaults" :key="vault.id" :vault-props="vault" :keep-prop="keepProp" />
+                  <DropdownComponent v-for="vault in state.myVaults" :key="vault.id" :vault-props="vault" :keep-prop="keepProp" />
                 </div>
               </div>
               <i class="fa fa-trash-o fa-2x text-danger" v-if="state.account.id == keepProp.creatorId" @click="deleteKeep" aria-hidden="true"></i>
@@ -59,6 +59,7 @@ import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 import { keepsService } from '../services/KeepsService'
 import { logger } from '../utils/Logger'
+// import { vaultsService } from '../services/VaultsService'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepsComponent',
@@ -68,7 +69,7 @@ export default {
   setup(props) {
     const state = reactive({
       account: computed(() => AppState.account),
-      vaults: computed(() => AppState.myVaults)
+      myVaults: computed(() => AppState.myVaults)
     })
     return {
       state,

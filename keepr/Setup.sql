@@ -75,12 +75,6 @@ INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
 --  INSERT INTO vaultkeeps (creatorId, vaultId, keepId) 
 --  VALUES ("23df7361-bfa9-4183-8257-a0d4f0a0cdae", 4, 5);
 
-/* Find All of Collection */
--- SELECT * FROM vaultkeeps;
--- SELECT * FROM profiles;
--- SELECT * FROM vaults;
--- SELECT * FROM keeps;
-
       -- SELECT keep.*,
       -- v.id as VaultKeepId
       -- FROM vaultkeeps v
@@ -95,3 +89,12 @@ INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
       --  FROM vaults vault 
       --  JOIN profiles profile ON vault.CreatorId = profile.id
       --  WHERE vault.CreatorId = '23df7361-bfa9-4183-8257-a0d4f0a0cdae';
+
+      /* Find All of Collection */
+-- SELECT * FROM vaultkeeps;
+-- SELECT * FROM profiles;
+-- SELECT * FROM vaults;
+-- SELECT * FROM keeps;
+
+      -- DELETE FROM keeps WHERE name='Test Name';
+      -- DELETE FROM vaults WHERE name='Test Vault Name PUT';

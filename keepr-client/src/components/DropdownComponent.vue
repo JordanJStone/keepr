@@ -15,7 +15,7 @@ export default {
     return {
       createVaultKeep(keep, newVaultId) {
         try {
-          // console.log('keepprop, vaultprop id', oldVaultId, newVaultId)
+          console.log(keep, newVaultId)
           vaultKeepsService.createVaultKeep(keep, newVaultId)
         } catch (error) {
           logger.log(error)

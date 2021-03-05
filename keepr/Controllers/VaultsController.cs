@@ -22,19 +22,19 @@ namespace keepr.Controllers
       _ks = ks;
     }
 
-    [HttpGet]
-    public ActionResult<IEnumerable<Vault>> Get()
-    // Do we need a get all vaults?
-    {
-      try
-      {
-        return Ok(_service.GetAll());
-      }
-      catch (Exception e)
-      {
-        return BadRequest(e.Message);
-      }
-    }
+    // [HttpGet]
+    // public ActionResult<IEnumerable<Vault>> Get()
+    // // Do we need a get all vaults?
+    // {
+    //   try
+    //   {
+    //     return Ok(_service.GetAll());
+    //   }
+    //   catch (Exception e)
+    //   {
+    //     return BadRequest(e.Message);
+    //   }
+    // }
 
     // [HttpGet("{id}")]
     // // No Auth needed here? Can't have two "Get"s, one with auth and one without.
