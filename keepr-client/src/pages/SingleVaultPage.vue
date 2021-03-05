@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <h2>{{ activeVault.name }}&nbsp;&nbsp;<i class="fa fa-trash-o text-danger" aria-hidden="true"></i></h2>
+      <h2>{{ activeVault.name }}&nbsp;&nbsp;<i class="fa fa-trash-o text-danger" aria-hidden="true" @click="deleteVault"></i></h2>
     </div>
     <div class="row">
       <div class="col-12 masonry">
@@ -39,7 +39,14 @@ export default {
     })
     return {
       state,
-      activeVault: computed(() => AppState.activeVault)
+      activeVault: computed(() => AppState.activeVault),
+      async deleteVault() {
+        try {
+          await vaultsService.deleteVault(route.params.id)
+        } catch (error) {
+          logger.log(error)
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
-  <div class="myKeepsComponent card mb-2 img-fluid">
-    <img :src="keepProp.img">
+  <div class="myKeepsComponent card mb-2">
+    <img :src="keepProp.img" class="img-fluid">
     <h4>
       {{ keepProp.name }}
     </h4>

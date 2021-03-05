@@ -1,6 +1,6 @@
 <template>
-  <div class="keepsComponent card mb-2 img-fluid" :data-target="'#keep-modal-'+keepProp.id" data-toggle="modal">
-    <img :src="keepProp.img">
+  <div class="keepsComponent card mb-2" :data-target="'#keep-modal-'+keepProp.id" data-toggle="modal">
+    <img :src="keepProp.img" class="img-fluid">
     <h4>
       {{ keepProp.name }}
     </h4>
@@ -22,7 +22,7 @@
           <div class="col-6">
             <img class="imageFit" :src="keepProp.img">
           </div>
-          <div class="col-6">
+          <div class="col-6 text-center">
             <div>
               <h2>{{ keepProp.name }}</h2>
             </div>

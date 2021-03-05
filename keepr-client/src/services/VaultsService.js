@@ -21,11 +21,15 @@ class VaultsService {
     AppState.activeVault = res.data
   }
 
-  // async getOne(id) {
-  //   const res = await api.get('api/vaults/' + id)
-  //   AppState.activeKeep = res.data
-  //   console.log(AppState.activeVault)
-  // }
+  async createVault(newVault) {
+    await api.post('api/vaults', newVault)
+  }
+
+  async deleteVault(id) {
+    console.log(id)
+    if (confirm('Confirm deletion?')) { await api.delete('api/vaults/' + id) }
+    // this.getNotes(note.bug)
+  }
 }
 
 export const vaultsService = new VaultsService()
