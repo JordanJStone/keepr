@@ -1,9 +1,10 @@
 <template>
   <div class="SingleVaultOfKeepsComponent card mb-2">
     <img :src="keepProp.img" class="img-fluid">
-    <h4>
+    <h4 class="textPosition text-white">
       {{ keepProp.name }}
-      <i class="fa fa-trash-o text-danger" @click="removeKeepFromVault"></i>
+      <i class="fa fa-trash-o text-danger ml-3" @click="removeKeepFromVault"></i>
+      <i class="fa fa-user ml-5 pl-5" aria-hidden="true"></i>
     </h4>
   </div>
 </template>
@@ -45,5 +46,16 @@ export default {
   width: 100%;
   object-fit: contain;
   } */
+
+.SingleVaultOfKeepsComponent {
+  position: relative;
+}
+
+.textPosition {
+  position: absolute;
+  bottom: 0px;
+  left: 4px;
+  font-size: 18px;
+}
 
 </style>

@@ -27,5 +27,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// .dropdown-item {
+//     transform: translateY(25%);
+//   position: absolute;
+//   bottom: 0;
+// }
 
 </style>

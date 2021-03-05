@@ -1,8 +1,9 @@
 <template>
   <div class="keepsComponent card mb-2" :data-target="'#keep-modal-'+keepProp.id" data-toggle="modal">
     <img :src="keepProp.img" class="img-fluid">
-    <h4>
+    <h4 class="textPosition text-white mr-3">
       {{ keepProp.name }}
+      <i class="fa fa-user ml-5" aria-hidden="true"></i>
     </h4>
   </div>
   <!-- Modal -->
@@ -23,8 +24,16 @@
             <img class="img-fluid mb-2 ml-1" :src="keepProp.img">
           </div>
           <div class="col-6 text-center">
+            <i class="fa fa-eye mb-3" aria-hidden="true"></i>
+            {{ keepProp.views }}
+            <i class="fa fa-folder-open-o ml-3" aria-hidden="true"></i>
+            {{ keepProp.keeps }}
+            <i class="fa fa-share-alt ml-3" aria-hidden="true"></i>
+            {{ keepProp.shares }}
             <div>
-              <h2>{{ keepProp.name }}</h2>
+              <h2 class="mb-3">
+                {{ keepProp.name }}
+              </h2>
             </div>
             <div>
               {{ keepProp.description }}
@@ -39,12 +48,12 @@
                   Put task in Vault
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <DropdownComponent v-for="vault in state.myVaults" :key="vault.id" :vault-props="vault" :keep-prop="keepProp" />
+                  <DropdownComponent class="btn btn-outline-success" v-for="vault in state.myVaults" :key="vault.id" :vault-props="vault" :keep-prop="keepProp" />
                 </div>
               </div>
               <i class="fa fa-trash-o fa-2x text-danger" v-if="state.account.id == keepProp.creatorId" @click="deleteKeep" aria-hidden="true"></i>
               <router-link :to="{name: 'ProfilePage', params: {id: keepProp.creator.id }}">
-                <i class="fa fa-user" aria-hidden="true">{{ keepProp.creator.name }}</i>
+                <img class="mr-1" :src="keepProp.creator.picture" height="35">{{ keepProp.creator.name }}
               </router-link>
             </div>
           </div>
@@ -97,8 +106,15 @@ export default {
   bottom: 0;
 }
 
-.img {
-  background-image: ;
+.keepsComponent {
+  position: relative;
+}
+
+.textPosition {
+  position: absolute;
+  bottom: 0px;
+  left: 4px;
+  font-size: 18px;
 }
 
 </style>
