@@ -14,6 +14,10 @@ class KeepsService {
     AppState.myKeeps = res.data
   }
 
+  async createKeep(newKeep) {
+    await api.post('api/keeps', newKeep)
+  }
+
   //   async getMyVaults(id) {
   //   const res = await api.get('api/profiles/' + id + '/vaults')
   //   // unsure if correct right now

@@ -20,7 +20,7 @@
         </button>
         <div class="row">
           <div class="col-6">
-            <img class="imageFit" :src="keepProp.img">
+            <img class="img-fluid mb-2 ml-1" :src="keepProp.img">
           </div>
           <div class="col-6 text-center">
             <div>

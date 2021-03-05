@@ -9,7 +9,7 @@
       <div class="col-12">
         <h3>Vaults <i class="fa fa-plus text-success" aria-hidden="true" data-toggle="modal" data-target="#exampleModal"></i></h3>
 
-        <!-- Modal -->
+        <!-- Create VAULT Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -72,7 +72,7 @@
             </div>
           </div>
         </div>
-        <!-- END MODAL -->
+        <!-- END VAULT MODAL -->
         <div class="row">
           <div class="col-12">
             <div class="masonry-custom mt-2">
@@ -85,7 +85,73 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <h3>Keeps <i class="fa fa-plus text-success" aria-hidden="true"></i></h3>
+        <h3>Keeps <i class="fa fa-plus text-success" aria-hidden="true" data-toggle="modal" data-target="#KeepModals"></i></h3>
+
+        <!-- Create KEEP Modal -->
+        <div class="modal fade" id="KeepModals" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLabel">
+                  New Keep
+                </h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="form-inline border justify-content-center align-items-center" @submit.prevent="createKeep">
+                  <div class="row">
+                    <div class="col-12">
+                      <h5>Title</h5>
+                      <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        v-model="state.newKeep.Name"
+                        class="form-control d-flex"
+                        placeholder="Title..."
+                      />
+                    </div>
+                    <div class="col-12">
+                      <h5>Description</h5>
+                      <input
+                        type="text"
+                        name="Description"
+                        id="Description"
+                        v-model="state.newKeep.Description"
+                        class="form-control d-flex"
+                        placeholder="Description..."
+                      />
+                    </div>
+                    <div class="col-12 mt-3">
+                      <h5>Image URL</h5>
+                    </div>
+                    <div class="col-12">
+                      <input
+                        type="text"
+                        name="Img"
+                        id="Img"
+                        v-model="state.newKeep.Img"
+                        class="form-control d-flex"
+                        placeholder="URL..."
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary" @click="createKeep">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END KEEP MODAL -->
       </div>
       <div class="col-12">
         <div class="masonry">
@@ -116,6 +182,12 @@ export default {
         Description: '',
         IsPrivate: false,
         creatorId: route.params.id
+      },
+      newKeep: {
+        Name: '',
+        Description: '',
+        Img: '',
+        creatorId: route.params.id
       }
     })
     onMounted(async() => {
@@ -136,6 +208,14 @@ export default {
         try {
           console.log('this is your new vault', state.newVault)
           await vaultsService.createVault(state.newVault, route.params.id)
+        } catch (error) {
+          logger.error(error)
+        }
+      },
+      async createKeep() {
+        try {
+          console.log('this is your new keep', state.newKeep)
+          await keepsService.createKeep(state.newKeep, route.params.id)
         } catch (error) {
           logger.error(error)
         }
