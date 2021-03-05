@@ -5,8 +5,8 @@
     </div>
     <div class="row">
       <div class="col-12 masonry">
-        <myKeeps-component class="item" v-for="r in state.keeps" :key="r.id" :keep-prop="r">
-        </myKeeps-component>
+        <SingleVaultOfKeeps-component class="item" v-for="r in state.keeps" :key="r.id" :keep-prop="r">
+        </SingleVaultOfKeeps-component>
       </div>
     </div>
   </div>

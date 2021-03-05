@@ -31,16 +31,18 @@
             </div>
             <div class="modal-footer col-12 d-flex justify-content-around align-content flex-end">
               <div class="dropdown">
-                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  Dropdown button
+                <button class="btn toggler dropdown-toggle button"
+                        type="button"
+                        id="dropdownMenuButton"
+                        data-toggle="dropdown"
+                >
+                  Put task in Vault
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <DropdownComponent v-for="vault in state.vaults" :key="vault.id" :vault-props="vault" :keep-prop="keepProp" />
+                </div>
               </div>
-              <i class="fa fa-trash-o fa-2x text-danger" aria-hidden="true"></i>
+              <i class="fa fa-trash-o fa-2x text-danger" v-if="state.account.id == keepProp.creatorId" @click="deleteKeep" aria-hidden="true"></i>
               <router-link :to="{name: 'ProfilePage', params: {id: keepProp.creator.id }}">
                 <i class="fa fa-user" aria-hidden="true">{{ keepProp.creator.name }}</i>
               </router-link>
@@ -53,7 +55,10 @@
 </template>
 
 <script>
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
+import { AppState } from '../AppState'
+import { keepsService } from '../services/KeepsService'
+import { logger } from '../utils/Logger'
 // import { AppState } from '../AppState'
 export default {
   name: 'KeepsComponent',
@@ -62,9 +67,19 @@ export default {
   },
   setup(props) {
     const state = reactive({
-      // vaults: computed(() => AppState.vaults.filter(l => l.id !== props.keepProp.vault))
+      account: computed(() => AppState.account),
+      vaults: computed(() => AppState.myVaults)
     })
-    return { state }
+    return {
+      state,
+      deleteKeep() {
+        try {
+          keepsService.deleteKeep(props.keepProp)
+        } catch (error) {
+          logger.log(error)
+        }
+      }
+    }
   }
 }
 </script>

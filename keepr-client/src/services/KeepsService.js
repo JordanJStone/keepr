@@ -18,6 +18,14 @@ class KeepsService {
     await api.post('api/keeps', newKeep)
   }
 
+  async deleteKeep(keep) {
+    console.log(keep)
+    if (confirm('Confirm deletion?')) { await api.delete('api/keeps/' + keep.id) }
+    // this.getTasks(task.list)
+  }
+
+  //     if (confirm('Confirm deletion?')) { await api.delete('api/vaultkeeps/' + id) }
+
   //   async getMyVaults(id) {
   //   const res = await api.get('api/profiles/' + id + '/vaults')
   //   // unsure if correct right now
