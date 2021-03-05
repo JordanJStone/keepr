@@ -18,12 +18,22 @@ namespace keepr.Services
       _pr = pr;
     }
 
-    public IEnumerable<Vault> GetAll()
-    // Do we ever need to get ALL Vaults? Should only need a specific profile's vaults
-    {
-      IEnumerable<Vault> vaults = _repo.GetAll();
-      return vaults;
-    }
+    // public IEnumerable<Vault> GetAll()
+    // // Do we ever need to get ALL Vaults? Should only need a specific profile's vaults
+    // {
+    //   IEnumerable<Vault> vaults = _repo.GetAll();
+    //   return vaults;
+    // }
+
+    // internal Vault GetById(int id, string userId)
+    // {
+    //   var data = _repo.GetById(id);
+    //   if (data.CreatorId != userId)
+    //   {
+    //     throw new Exception("Invalid Id");
+    //   }
+    //   return data;
+    // }
 
     internal Vault GetById(int id)
     {
@@ -36,16 +46,6 @@ namespace keepr.Services
       return data;
     }
 
-    // internal Vault GetByIdForEditingOnly(int id)
-    // {
-    //   var data = _repo.GetByIdForEditingOnly(id);
-    //   if (data == null)
-    //   {
-    //     throw new Exception("Invalid Id");
-    //   }
-    //   return data;
-    // }
-
 
     public Vault Create(Vault newVault)
     {
@@ -55,6 +55,7 @@ namespace keepr.Services
 
     internal Vault Edit(Vault updated, string userId)
     {
+      // Vault original = GetById(updated.Id, userId);
       Vault original = GetById(updated.Id);
       if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Vault You did not Create"); }
       updated.Name = updated.Name != null ? updated.Name : original.Name;
