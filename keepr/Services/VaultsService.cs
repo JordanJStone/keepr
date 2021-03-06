@@ -25,15 +25,18 @@ namespace keepr.Services
     //   return vaults;
     // }
 
-    // internal Vault GetById(int id, string userId)
-    // {
-    //   var data = _repo.GetById(id);
-    //   if (data.CreatorId != userId)
-    //   {
-    //     throw new Exception("Invalid Id");
-    //   }
-    //   return data;
-    // }
+    internal Vault GetByIdTest(int id, string userId)
+    {
+      var data = _repo.GetById(id);
+      if (data.CreatorId != userId)
+      {
+        if (data.IsPrivate)
+        {
+          throw new Exception("Invalid Id");
+        }
+      }
+      return data;
+    }
 
     internal Vault GetById(int id)
     {
@@ -55,8 +58,8 @@ namespace keepr.Services
 
     internal Vault Edit(Vault updated, string userId)
     {
-      // Vault original = GetById(updated.Id, userId);
-      Vault original = GetById(updated.Id);
+      Vault original = GetByIdTest(updated.Id, userId);
+      // Vault original = GetById(updated.Id);
       if (original.CreatorId != userId) { throw new Exception("Access Denied: Cannot Edit a Vault You did not Create"); }
       updated.Name = updated.Name != null ? updated.Name : original.Name;
       updated.Description = updated.Description != null ? updated.Description : original.Description;

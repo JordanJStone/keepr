@@ -96,5 +96,14 @@ INSERT INTO burgers (name, age, hungry) VALUES ("rin-tin-tin", 25, true); */
 -- SELECT * FROM vaults;
 -- SELECT * FROM keeps;
 
-      -- DELETE FROM keeps WHERE name='Test Name';
-      -- DELETE FROM vaults WHERE name='Test Vault Name PUT';
+--       INSERT INTO vaultkeeps
+--       (creatorId, vaultId, keepId)
+--       VALUES
+--       (@CreatorId, @VaultId, @KeepId);
+--       UPDATE keeps
+--         keeps = keeps + 1
+--       WHERE id = @keepId;
+--       SELECT LAST_INSERT_ID()";
+
+      DELETE FROM keeps WHERE name='Test Name';
+      DELETE FROM vaults WHERE name='Test Vault Name PUT';

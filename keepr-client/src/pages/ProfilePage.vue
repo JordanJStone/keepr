@@ -4,6 +4,7 @@
     <div class="row mt-5">
       <div class="col-2">
         <img :src="state.user.picture" class="img-fluid">
+        <!-- <img :src="state.vaults.creator.img" class="img-fluid"> -->
       </div>
       <div class="col-4">
         <h1>{{ state.user.name }}</h1>

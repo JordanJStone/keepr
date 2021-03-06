@@ -18,10 +18,11 @@ class KeepsService {
     await api.post('api/keeps', newKeep)
   }
 
-  async increment(keep) {
-    const updated = { keeps: keep.keeps++ }
-    await api.put('api/keeps/' + keep.id, updated)
-  }
+  // DON'T NEED THIS, IS HANDLED ON THE BACKEND
+  // async increment(keep) {
+  //   const updated = { keeps: keep.keeps++ }
+  //   await api.put('api/keeps/' + keep.id, updated)
+  // }
   // { await api.delete('api/vaultkeeps/' + keepProp.vaultKeepId) }
 
   async deleteKeep(keep) {

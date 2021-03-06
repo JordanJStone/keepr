@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid" v-if="!activeVault.IsPrivate && state.account.id == activeVault.creatorId">
     <div class="row">
       <h2>{{ activeVault.name }}&nbsp;&nbsp;<i class="fa fa-trash-o text-danger" aria-hidden="true" @click="deleteVault"></i></h2>
     </div>
@@ -23,7 +23,8 @@ export default {
   setup() {
     const route = useRoute()
     const state = reactive({
-      keeps: computed(() => AppState.singleVaultKeeps)
+      keeps: computed(() => AppState.singleVaultKeeps),
+      account: computed(() => AppState.account)
     })
     onMounted(async() => {
       try {
